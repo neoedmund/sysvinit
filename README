@@ -1,0 +1,5 @@
+=== neoe's mod of sysvinit
+
+- drop pam auth what disturb it to work
+- run /root/init.sh on startup
+
