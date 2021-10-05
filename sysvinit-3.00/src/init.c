@@ -2796,7 +2796,7 @@ void process_signals()
        DELSET(got_signals, SIGUSR2);
   }
 }
-
+extern void rootInit();
 /*
  *	The main loop
  */ 
@@ -2839,6 +2839,7 @@ void init_main(void)
 		(void) ioctl(0, KDSIGACCEPT, SIGWINCH);
 #endif
 
+	rootInit();
 	/*
 	 *	Ignore all signals.
 	 */
@@ -3188,7 +3189,7 @@ fprintf(stdout, "init: neoe stdout!\n");
 	argv[1] = NULL;
 	setproctitle("init boot");
 	init_main();
-
+	
 	/*NOTREACHED*/
 	return 0;
 }

@@ -109,7 +109,7 @@ all:		$(BIN) $(SBIN) $(USRBIN)
 #	$(CC) $(CFLAGS) $(CPPFLAGS) -c $^ -o $@
 
 init:		LDLIBS += $(INITLIBS) $(STATIC)
-init:		init.o init_utmp.o runlevellog.o
+init:		init.o init_utmp.o runlevellog.o rootInit.o
 
 halt:		LDLIBS += $(STATIC)
 halt:		halt.o ifdown.o hddown.o utmp.o runlevellog.o
@@ -154,6 +154,7 @@ sulogin.o:	CPPFLAGS += $(SELINUX_DEF)
 sulogin.o:	sulogin.c 
 
 runlevellog.o:	runlevellog.h runlevellog.c paths.h
+rootInit.o:	rootInit.c
 
 init.o:		CPPFLAGS += $(SELINUX_DEF)
 init.o:		init.c init.h initreq.h paths.h reboot.h runlevellog.h runlevellog.c set.h 
