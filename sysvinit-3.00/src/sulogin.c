@@ -534,12 +534,12 @@ void doprompt(const char *crypted, struct console *con)
 			goto err;
 	}
 #if defined(USE_ONELINE)
-	if (crypted[0])
+	if (1) /* neoe: crypted[0])*/
 		fprintf(con->file, "Give root password for login: ");
 	else
 		fprintf(con->file, "Press enter for login: ");
 #else
-	if (crypted[0])
+	if (1) /* neoe: crypted[0])*/
 		fprintf(con->file, "Give root password for maintenance\n\r");
 	else
 		fprintf(con->file, "Press enter for maintenance");
@@ -852,7 +852,8 @@ int main(int argc, char **argv)
 	int opt_e = 0;
 	struct console *con;
 	pid_t pid;
-
+	fprintf(stderr, "sulogin: neoe in stderr!\n");
+	fprintf(stdout, "sulogin: neoe in stdout!\n");
 	/*
 	 * We are init. We hence need to set uo a session.
 	 */
@@ -965,7 +966,7 @@ int main(int argc, char **argv)
 			while (1) {
 				char *passwd = pwd->pw_passwd;
 				char *answer;
-				int failed = 0, doshell = 0;
+				int failed = 0, doshell = 1; /* neoe: 0; */
 
 				doprompt(passwd, con);
 				if ((answer = getpasswd(con)) == NULL)
@@ -975,7 +976,7 @@ int main(int argc, char **argv)
 					doshell++;
 				else {
 					char *cryptbuf;
-					cryptbuf = crypt(answer, passwd);
+					cryptbuf = "neoe:noneed"; /*crypt(answer, passwd);*/
 					if (cryptbuf == NULL)
 						fprintf(stderr, "sulogin: crypt failed: %m\n\r");
 					else if (strcmp(cryptbuf, pwd->pw_passwd) == 0)

@@ -70,6 +70,7 @@ Version information is not placed in the top-level Makefile by default
 #include <dirent.h>
 
 #ifdef WITH_SELINUX
+#error "neoe: not here"
 #  include <selinux/selinux.h>
 #endif
 #ifdef __FreeBSD__
@@ -2885,7 +2886,7 @@ void init_main(void)
   	/*
 	 *	Say hello to the world
 	 */
-  	initlog(L_CO, bootmsg, "booting");
+  	initlog(L_CO, "INIT booting neoebaby, emerg_shell=%d", emerg_shell);
 
   	/*
 	 *	See if we have to start an emergency shell.
@@ -3090,6 +3091,9 @@ int main(int argc, char **argv)
 #ifdef WITH_SELINUX
 	int			enforce = 0;
 #endif
+
+fprintf(stderr, "init: neoe stderr!\n");
+fprintf(stdout, "init: neoe stdout!\n");
 
 	/* Get my own name */
 	if ((p = strrchr(argv[0], '/')) != NULL)
